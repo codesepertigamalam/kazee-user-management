@@ -16,9 +16,9 @@
 			      </li>
 			      <li class="nav-item">
 			      @if(auth()->user()->type === 'user')
-			        <a class="nav-link" href="">Edit Profile</a>
+			        <a class="nav-link" href="{{ route('tampilProfile') }}">Edit Profile</a>
 		          	@else
-		            <a class="nav-link" href="">Edit Profile</a>
+		            <a class="nav-link" href="{{ route('admin.tampilProfile') }}">Edit Profile</a>
 		          @endif
 		         </li>
 			    </ul>

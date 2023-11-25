@@ -25,4 +25,6 @@ Route::middleware(['auth' ,'user-access:user'])->group(function () {
 
 Route::middleware(['auth' ,'user-access:admin'])->group(function () {
     Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/admin/tampilProfile', [App\Http\Controllers\AdminController::class, 'tampilProfile'])->name('admin.tampilProfile');
+    Route::post('/admin/updateProfile', [App\Http\Controllers\AdminController::class, 'updateProfile'])->name('admin.updateProfile');
 });
