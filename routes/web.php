@@ -19,4 +19,6 @@ Route::get('/', function () {
 
 Route::middleware(['auth' ,'user-access:user'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\UserController::class, 'userDashboard'])->name('dashboard');
+    Route::get('/tampilProfile', [App\Http\Controllers\UserController::class, 'tampilProfile'])->name('tampilProfile');
+    Route::post('/updateProfile', [App\Http\Controllers\UserController::class, 'updateProfile'])->name('updateProfile');
 });
