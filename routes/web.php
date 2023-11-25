@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Auth::routes();
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
+});
+
+Route::middleware(['auth' ,'user-access:user'])->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\UserController::class, 'userDashboard'])->name('dashboard');
 });
