@@ -54,4 +54,9 @@ class User extends Authenticatable
             get: fn ($value) =>  ["user", "admin"][$value],
         );
     }
+
+    public function profile(): HasOne
+    {
+        return $this->hasOne(Profile::class,'id_user');
+    }
 }

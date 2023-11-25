@@ -21,6 +21,13 @@
 		            <a class="nav-link" href="{{ route('admin.tampilProfile') }}">Edit Profile</a>
 		          @endif
 		         </li>
+		         <li class="nav-item">
+			      @if(auth()->user()->type === 'user')
+			      	<a class="nav-link" href="{{ route('tampilPassword') }}">Edit Password</a>
+		          	@else
+		          	<a class="nav-link" href="{{ route('admin.tampilPassword') }}">Edit Password</a>
+		          @endif
+		      	  </li>
 			    </ul>
 			    @if(Auth::check())
 			    <form action="{{ route('logout') }}" method="POST">

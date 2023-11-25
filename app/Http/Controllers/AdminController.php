@@ -75,4 +75,36 @@ class AdminController extends Controller
         return back()->with('success','Data updated successfully');
 
     }
+    public function tampilPassword()
+    {
+        return view('admin.pagePassword');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:8|different:current_password',
+            'new_password_confirmation' => 'required|same:new_password',
+        ], [
+            'current_password.required' => 'The current password field is required.',
+            'new_password.required' => 'The new password field is required.',
+            'new_password.string' => 'The new password must be a string.',
+            'new_password.min' => 'The new password must be at least :min characters.',
+            'new_password.different' => 'The new password must be different from the current password.',
+            'new_password_confirmation.required' => 'The confirm new password field is required.',
+            'new_password_confirmation.same' => 'The confirm new password must match the new password.',
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()->route('admin.updatePassword')->with('error', 'Current password is incorrect.');
+        }
+
+        $user->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+        return back()->with('success','Data updated successfully');
+    }
 }
