@@ -20,19 +20,15 @@
 			      			<label class="form-label" for="email">Email</label>
 			      			<input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" id="email"placeholder="Enter Email Address">
 			      			@error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+							    <div class="alert alert-danger">{{ $message }}</div>
+							@enderror
 			      		</div>
 			            <div class="form-group mb-3">
 			            	<label class="form-label" for="password">Password</label>
 			              <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="userpassword" placeholder="Password">
 			              @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                          @enderror
+							    <div class="alert alert-danger">{{ $message }}</div>
+							@enderror
 			            </div>
 			            <div class="form-group">
 			            	<button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
@@ -47,6 +43,11 @@
 							</div>
 			            </div>
 		          </form>
+			      	@if (session('error'))
+					    <div class="alert alert-danger">
+					        {{ session('error') }}
+					    </div>
+					@endif
 		          <p class="text-center">Belum memiliki Akun? <a data-toggle="tab" href="{{ url('register') }}">Sign Up</a></p>
 		        </div>
 		      </div>
