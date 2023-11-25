@@ -51,7 +51,9 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
+        $remember = $request->has('remember');
+
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password']), $remember)) {
             if (auth()->user()->type == 'admin') {
                 return redirect()->route('admin.dashboard');
             } else {
