@@ -14,6 +14,13 @@
 		            <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard <span class="sr-only">(current)</span></a>
 		          @endif
 			      </li>
+			      <li class="nav-item">
+			      @if(auth()->user()->type === 'user')
+			        <a class="nav-link" href="">Edit Profile</a>
+		          	@else
+		            <a class="nav-link" href="">Edit Profile</a>
+		          @endif
+		         </li>
 			    </ul>
 			    @if(Auth::check())
 			    <form action="{{ route('logout') }}" method="POST">
