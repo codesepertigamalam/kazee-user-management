@@ -107,4 +107,41 @@ class AdminController extends Controller
         ]);
         return back()->with('success','Data updated successfully');
     }
+    public function tampilUser()
+    {
+        $user = User::where('type', '0')->get();
+        return view('admin.pageUser', compact('user'));
+    }
+    public function addUser()
+    {
+        return view('admin.pageAddUser');
+    }
+    public function addUserDone(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email|max:255',
+        ], [
+            'name.required' => 'The name field is required.',
+            'name.string' => 'The name must be a string.',
+            'name.max' => 'The name may not be greater than :max characters.',
+            'email.required' => 'The email field is required.',
+            'email.email' => 'The email must be a valid email address.',
+            'email.unique' => 'The email has already been taken.',
+            'email.max' => 'The email may not be greater than :max characters.',
+        ]);
+
+        User::insert([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make('sepertigamalam'),
+            'type' => '0'
+        ]);
+        return back()->with('success','User created successfully');
+    }
+    public function deleteUser($user)
+    {
+        User::where('id_user',$user)->delete();
+        return back()->with('success','User deleted successfully');
+    }
 }

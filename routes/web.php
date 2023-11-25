@@ -31,4 +31,8 @@ Route::middleware(['auth' ,'user-access:admin'])->group(function () {
     Route::post('/admin/updateProfile', [App\Http\Controllers\AdminController::class, 'updateProfile'])->name('admin.updateProfile');
     Route::get('/admin/tampilPassword', [App\Http\Controllers\AdminController::class, 'tampilPassword'])->name('admin.tampilPassword');
     Route::post('/admin/updatePassword', [App\Http\Controllers\AdminController::class, 'updatePassword'])->name('admin.updatePassword');
+    Route::get('/admin/tampilUser', [App\Http\Controllers\AdminController::class, 'tampilUser'])->name('admin.tampilUser');
+    Route::get('/admin/addUser', [App\Http\Controllers\AdminController::class, 'addUser'])->name('admin.addUser');
+    Route::post('/admin/addUserDone', [App\Http\Controllers\AdminController::class, 'addUserDone'])->name('admin.addUserDone');
+    Route::post('/admin/deleteUser/{user}', [App\Http\Controllers\AdminController::class, 'deleteUser'])->name('admin.deleteUser');
 });
